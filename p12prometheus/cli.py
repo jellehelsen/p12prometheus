@@ -28,3 +28,6 @@ def main():
         for metric in METRICS:
             g[metric].set(getattr(telegram, metric).value)
         push_to_gateway(gateway, job="energy_meter", registry=registry)
+
+if __name__ == '__main__':
+        main()
