@@ -31,6 +31,9 @@ jobs:
       - name: Prepare requirements file
         run: poetry export > requirements.txt
 
+      - name: check requirements file
+        run: cat requirements.txt
+
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v3
