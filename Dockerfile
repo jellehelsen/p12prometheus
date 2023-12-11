@@ -1,4 +1,4 @@
-FROM python:3.11-alpine
+FROM python:3.11
 MAINTAINER Jelle Helsen <jelle.helsen@hcode.be>
 
 COPY requirements.txt /app/
