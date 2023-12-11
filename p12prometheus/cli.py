@@ -20,13 +20,13 @@ def main():
         telegram_specification=telegram_specifications.V4
     )
     registry = CollectorRegistry()
-    gauges = {
+    gauges = {}
     for metric in METRICS:
-        g[metric] = Gauge(metric.lower(), metric.lower(), registry=registry)
+        gauges[metric] = Gauge(metric.lower(), metric.lower(), registry=registry)
 
     for telegram in serial_reader.read():
         for metric in METRICS:
-            g[metric].set(getattr(telegram, metric).value)
+            gauges[metric].set(getattr(telegram, metric).value)
         push_to_gateway(gateway, job="energy_meter", registry=registry)
 
 if __name__ == '__main__':
