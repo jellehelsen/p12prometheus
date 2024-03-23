@@ -24,7 +24,7 @@ pipeline {
                       - mountPath: /tmp
                         name: tmp-volume
                   - name: nix
-                    image: nixpkgs/nix-flakes
+                    image: nixos/nix
                     imagePullPolicy: Always
                     command:
                       - cat
@@ -49,7 +49,7 @@ pipeline {
         stage("Build") {
             steps {
                 container("nix") {
-                    sh "nix develop --command bash -c 'make requirements.txt'"
+                    sh "nix-shell -p poetry --run 'make requirements.txt'"
                 }
                 container("podman") {
                     sh "podman build ."
